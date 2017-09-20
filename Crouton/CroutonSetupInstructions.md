@@ -68,7 +68,7 @@ sudo apt-get install -f
 sudo apt-get install git libnss3 python gvfs-bin ruby mysql-common mysql-server mysql-client php-mysql python-mysqldb
 ```
 
-### LinuxBrew, Bower, etc
+### LinuxBrew
 See: http://linuxbrew.sh/ for more. 
 ```
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"
@@ -121,14 +121,16 @@ nvm use node
 ### npm packages
 NOTE: Some people don't like globally installing some/all of these packages. It's up to you what you want/need globally or by project.
 ```
+npm install -g lodash
+npm install -g surge
+npm install -g bower
+```
+You might also want these installed (or these `npm install gulp`, `npm install express`): 
+```
 npm install -g react
 npm install -g react-dom
-npm install -g prop-types
-npm install -g gulp
-npm install -g express
-npm install -g lodash
 npm install -g create-react-app
-npm install -g surge
+npm install -g prop-types
 ```
 NOTE: If you are having write problems installing global npm packages, you may need to adjust directory settings or install in another directory. For more info see: https://docs.npmjs.com/getting-started/fixing-npm-permissions but be careful as you can get into trouble messing with permissions. You've been warned.
 
@@ -180,6 +182,8 @@ sudo ln -s /usr/local/lib/heroku/bin/heroku /usr/local/bin/heroku
 ```
 NOTE: `linux`, `x64` and `v6.14.25-4fab11b-linux-x64` are specific to my machine. Yours might be different. See the above link for Heroku to find your machine's instructions. Test it's installed correctly with `heroku --version` as usual.
 
+
+#### And that's it!
 
 I'll add more as I remember them but this should be a pretty solid start to a development machine on a Chromebook.
 
