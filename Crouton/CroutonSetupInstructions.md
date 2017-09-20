@@ -1,7 +1,7 @@
 # Crouton + Ubuntu = Dev Env
 ## Tested on HP Chromebook 14
 
-  1. Powerwash your Chromebook:
+1. Powerwash your Chromebook:
   * In the taskbar, click on the settings omnibox (where the clock, wifi, and battery are located).
   * Click on the Cog that will open the Settings window
   * Scroll to the bottom and click on Advanced
@@ -13,9 +13,9 @@
 
 Now that you have a fresh powerwashed ChromeBook in Developer mode:
 
-  2. Go to DScheider's crouton github (https://github.com/dnschneid/crouton/) and read the instructions to see if anything has changed. 
-  3. Download Crouton (direct link): https://goo.gl/fd3zc
-  4. Ctrl+Alt+T to open a new terminal window
+2. Go to DScheider's crouton github (https://github.com/dnschneid/crouton/) and read the instructions to see if anything has changed. 
+3. Download Crouton (direct link): https://goo.gl/fd3zc
+4. Ctrl+Alt+T to open a new terminal window
 
 Tips:
 ```bash
@@ -23,22 +23,24 @@ sh ~/Downloads/crouton -t help
 sh ~/Downloads/crouton -r list
 ```
 
-  5. Install the chroot with some extra packages:
+5. Install the chroot with some extra packages:
 ```bash
-sudo sh ~/Downloads/crouton -t xiwi,cli-extra,keyboard,xfce4 -u
+sudo sh ~/Downloads/crouton -t xiwi,cli-extra,keyboard,xfce-desktop
 ```
-
 Note: Xiwi package allows you to run a full Ubuntu/chroot in a window in ChromeOS. Allowing you to Alt-tab between operating system environments, share the clipboard, etc. 
 
-Note: After it installs all the packages you'll get some informative text. Read that for other options. 
+Note: This will take a while. But check in once in a while because eventually it will prompt you for a user name and password for the default user. At which point the script should be about finished. After it installs all the packages you'll get some informative text. Read that for other options. 
 
-  6. Enter your new chroot:
+6. Enter your new chroot:
 ```shell
 sudo startxfce4 -b
 ```
 Note: -b flag opens in the background so you don't have to keep this terminal window open. Once the command is run you can safely close that Chrosh/ChromeOS terminal shell window if you want. 
 
 Now you have a working, bare-bones install of Ubuntu LTS.
+
+
+
 
 ## Part (2) - Getting dependencies and packages installed for a Development environment
 
@@ -52,7 +54,7 @@ sudo apt-get install nano less gedit kate geany joe
 ### Utility packages
 Office suite, browsers, vlc media player, image editing and viewing and manipulation, terminal enhancements
 ```bash
-sudo apt-get install libreoffice chromium-browser firefox vlc kodi digiKam shotwell gimp clementine terminator zsh smem bash curl wget build-essential m4 texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev zlib1g-dev
+sudo apt-get install libreoffice chromium-browser firefox vlc kodi digikam shotwell gimp clementine terminator zsh smem bash curl wget build-essential m4 texinfo libbz2-dev libcurl4-openssl-dev libexpat-dev libncurses-dev zlib1g-dev
 ```
 
 Tip. To fix missing dependencies at any time, run:
@@ -75,6 +77,7 @@ Add PATH vars:
 echo 'export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"' >>~/.bash_profile
 echo 'export MANPATH="/home/linuxbrew/.linuxbrew/share/man:$MANPATH"' >>~/.bash_profile
 echo 'export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:$INFOPATH"' >>~/.bash_profile
+PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 ```
 And test to ensure they are working
 ```
@@ -83,17 +86,17 @@ test -d /home/linuxbrew/.linuxbrew && PATH="/home/linuxbrew/.linuxbrew/bin:$PATH
 test -r ~/.bash_profile && echo 'export PATH="$(brew --prefix)/bin:$PATH"' >>~/.bash_profile
 echo 'export PATH="$(brew --prefix)/bin:$PATH"' >>~/.profile
 ```
-If you get a locales error when testing the echo command above, check out https://www.thomas-krenn.com/en/wiki/Perl_warning_Setting_locale_failed_in_Debian and try setting:
+NOTE: If you get a locales error when testing the echo command above, first try closing all terminal windows and opening a fresh one. If it still isn't working check out https://www.thomas-krenn.com/en/wiki/Perl_warning_Setting_locale_failed_in_Debian and try setting:
 ```
-localedef -i en_US -f UTF-8 en_US.UTF-8
+sudo localedef -i en_US -f UTF-8 en_US.UTF-8
 ```
 then run the echo command or 
 ```
 brew --version
 ```
-and it should have no errors.
+and it should have no errors. Try closing all terminal windows and reopening or moving back up a step if it still isn't working.
 
-### NodeJS, npm, and nvm
+### NodeJS and npm are installed using nvm (node version manager)
 For instructions, see: https://github.com/creationix/nvm
 ```
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.4/install.sh | bash
@@ -101,55 +104,20 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 command -v nvm
 ```
-If the last command fails, close and reopen your terminal editor.
+If the last command fails, close and reopen your terminal editor. Alternatively, test using `nvm --version`
 
-### IDE/Code editors
-#### Atom - https://github.com/atom/atom
-Download the amd64 deb file, navigate to the download directory and run
+To install the current LTS of NodeJS, use nvm:
+```bash
+nvm install node
 ```
-sudo dpkg --install atom-amd64.deb
-```
-#### VSCode - https://code.visualstudio.com/docs/setup/linux
-Download the current install .deb file from https://code.visualstudio.com/docs/setup/linux and run:
-```
-sudo dpkg -i code_1.16.1-1505406497_amd64.deb
-```
+You can check Node and npm with `node --version` and `npm --version` respectively to ensure they were installed correctly.
 
-### Android development
+Finally, to use the current installed version:
 ```
-sudo apt-get install genymotion
-```
-Android Studio - https://developer.android.com/studio/install.html
-Prereqs:
-```
-sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-1.0:i386
-```
-Then follow instructions on the website for the latest version (dl, install).
-
-### Nice to haves
-```
-sudo apt-get install mcrypt handbrake nmap
+nvm use node
 ```
 
-
-
-
-
-
-
-ALTERNATIVE INSTALLS (these don't seem to work as well as the instructions above for me but YMMV): 
-
-Use linuxbrew to install if possible. Otherwise follow these instructions:
-
-### NodeJS, npm, web dev packages
-https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions
-```
-curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-sudo apt-get install -y nodejs
-sudo apt-get install -y build-essential
-```
-
-#### npm packages
+### npm packages
 ```
 npm install -g react
 npm install -g react-dom
@@ -159,8 +127,43 @@ npm install -g express
 npm install -g lodash
 npm install -g create-react-app
 ```
-NOTE: If you are having write problems installing global npm packages, you may need to adjust directory settings or install in another directory. For more info see: https://docs.npmjs.com/getting-started/fixing-npm-permissions
+NOTE: If you are having write problems installing global npm packages, you may need to adjust directory settings or install in another directory. For more info see: https://docs.npmjs.com/getting-started/fixing-npm-permissions but be careful as you can get into trouble messing with permissions. You've been warned.
 
+### Yarn
+```
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt-get update && sudo apt-get install yarn
+yarn --version
+```
+This should install everything and show you the version number of yarn you just installed. 
 
+### IDE/Code editors
+#### Atom - https://github.com/atom/atom
+Download the amd64 deb file, navigate to the download directory and run
+```
+sudo dpkg --install atom-amd64.deb
+```
 
+#### VSCode - https://code.visualstudio.com/docs/setup/linux
+Download the current install .deb file from https://code.visualstudio.com/docs/setup/linux and run:
+```
+sudo dpkg -i code_1.16.1-1505406497_amd64.deb
+```
+NOTE: Your version number may vary. Use the above as an example only.
 
+### Android development
+
+Android Studio - https://developer.android.com/studio/install.html
+Prereqs:
+```
+sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-1.0:i386
+```
+Then follow instructions on the website to download and install the latest version.
+
+### Nice to haves
+```
+sudo apt-get install mcrypt handbrake nmap
+```
+
+I'll add more as I remember them but this should be a pretty solid start to a development machine on a Chromebook.
