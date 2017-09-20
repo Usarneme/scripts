@@ -1,21 +1,21 @@
 # Crouton + Ubuntu = Dev Env
 ## Tested on HP Chromebook 14
 
-1. Powerwash your Chromebook:
-*In the taskbar, click on the settings omnibox (where the clock, wifi, and battery are located).
-*Click on the Cog that will open the Settings window
-*Scroll to the bottom and click on Advanced
-*Scroll to the bottom and click on Powerwash -- follow the instructions. It will take a minute.
-*The computer should auto-restart. You can login at this point but you need to first turn on Developer Mode.
-*When the Chromebook is on, click Esc+Refresh+Power buttons on the keyboard
-*The warning will tell you this is not a secure setup -- read that warning and do so at your own risk.
-*Ctrl+D at startup will skip the warning splash page; or just wait 30 extra seconds.
+  1. Powerwash your Chromebook:
+  * In the taskbar, click on the settings omnibox (where the clock, wifi, and battery are located).
+  * Click on the Cog that will open the Settings window
+  * Scroll to the bottom and click on Advanced
+  * Scroll to the bottom and click on Powerwash -- follow the instructions. It will take a minute.
+  * The computer should auto-restart. You can login at this point but you need to first turn on Developer Mode.
+  * When the Chromebook is on, click Esc+Refresh+Power buttons on the keyboard
+  * The warning will tell you this is not a secure setup -- read that warning and do so at your own risk.
+  * Ctrl+D at startup will skip the warning splash page; or just wait 30 extra seconds.
 
 Now that you have a fresh powerwashed ChromeBook in Developer mode:
 
-2. Go to DScheider's crouton github (https://github.com/dnschneid/crouton/) and read the instructions to see if anything has changed. 
-3. Download Crouton (direct link): https://goo.gl/fd3zc
-4. Ctrl+Alt+T to open a new terminal window
+  2. Go to DScheider's crouton github (https://github.com/dnschneid/crouton/) and read the instructions to see if anything has changed. 
+  3. Download Crouton (direct link): https://goo.gl/fd3zc
+  4. Ctrl+Alt+T to open a new terminal window
 
 Tips:
 ```bash
@@ -23,7 +23,7 @@ sh ~/Downloads/crouton -t help
 sh ~/Downloads/crouton -r list
 ```
 
-5. Install the chroot with some extra packages:
+  5. Install the chroot with some extra packages:
 ```bash
 sudo sh ~/Downloads/crouton -t xiwi,cli-extra,keyboard,xfce4 -u
 ```
@@ -32,7 +32,7 @@ Note: Xiwi package allows you to run a full Ubuntu/chroot in a window in ChromeO
 
 Note: After it installs all the packages you'll get some informative text. Read that for other options. 
 
-6. Enter your new chroot:
+  6. Enter your new chroot:
 ```shell
 sudo startxfce4 -b
 ```
