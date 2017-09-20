@@ -1,5 +1,6 @@
-# Crouton + Ubuntu = Dev Env
-## Tested on HP Chromebook 14
+# ChromeBook/OS + Crouton + Ubuntu = Development Environment
+## WARNING: This is messing around with the linux command line. You can and probably will break things. No warranty, as-is code. Use at your own risk. 
+### Tested on HP Chromebook 14. Working as of 09/20/2017
 
 1. Powerwash your Chromebook:
   * In the taskbar, click on the settings omnibox (where the clock, wifi, and battery are located).
@@ -118,6 +119,7 @@ nvm use node
 ```
 
 ### npm packages
+NOTE: Some people don't like globally installing some/all of these packages. It's up to you what you want/need globally or by project.
 ```
 npm install -g react
 npm install -g react-dom
@@ -126,6 +128,7 @@ npm install -g gulp
 npm install -g express
 npm install -g lodash
 npm install -g create-react-app
+npm install -g surge
 ```
 NOTE: If you are having write problems installing global npm packages, you may need to adjust directory settings or install in another directory. For more info see: https://docs.npmjs.com/getting-started/fixing-npm-permissions but be careful as you can get into trouble messing with permissions. You've been warned.
 
@@ -156,14 +159,32 @@ NOTE: Your version number may vary. Use the above as an example only.
 
 Android Studio - https://developer.android.com/studio/install.html
 Prereqs:
-```
+```terminal
 sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-1.0:i386
 ```
 Then follow instructions on the website to download and install the latest version.
 
 ### Nice to haves
-```
+```bash
 sudo apt-get install mcrypt handbrake nmap
 ```
 
+### Heroku
+For more info see: https://devcenter.heroku.com/articles/heroku-cli
+```shell
+wget https://cli-assets.heroku.com/heroku-cli/channels/stable/heroku-cli-linux-x64.tar.gz -O heroku.tar.gz
+tar -xvzf heroku.tar.gz
+mkdir -p /usr/local/lib /usr/local/bin
+sudo mv heroku-cli-v6.14.25-4fab11b-linux-x64 /usr/local/lib/heroku
+sudo ln -s /usr/local/lib/heroku/bin/heroku /usr/local/bin/heroku
+```
+NOTE: `linux`, `x64` and `v6.14.25-4fab11b-linux-x64` are specific to my machine. Yours might be different. See the above link for Heroku to find your machine's instructions. Test it's installed correctly with `heroku --version` as usual.
+
+
 I'll add more as I remember them but this should be a pretty solid start to a development machine on a Chromebook.
+
+Pull/fork, or message me if you want to add anything or report any issues. 
+
+This is a specific set of instructions for an HP Chromebook so it may not work the same for everyone and isn't intended to be an all-encompassing list. These are general instructions that should work with most linux distros using their various package managers/install schemes. 
+
+##### Good luck!
