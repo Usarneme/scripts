@@ -16,8 +16,7 @@ mkdir views
 mkdir views/includes
 
 # Create boilerplate server file
-touch server.js &&
-cat <<EOM >server.js
+cat <<EOM >index.js
 const express = require('express')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
@@ -72,13 +71,6 @@ app.get('*', (req, res) => {
 app.listen(PORT, () => console.log('Express Server listening on port '+PORT))
 
 EOM
-
-# Create pug partials
-touch views/includes/footer.pug
-touch views/includes/header.pug
-touch views/index.pug
-touch views/layout.pug
-touch views/login.pug
 
 # Fill boilerplate in pug partials
 touch views/includes/footer.pug
