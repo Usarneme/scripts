@@ -26,8 +26,8 @@ mkdir views/includes
 
 #### Create boilerplate server file
 ```sh
-touch server.js &&
-cat <<EOM >server.js
+touch index.js &&
+cat <<EOM >index.js
 const express = require('express')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
@@ -84,30 +84,21 @@ app.listen(PORT, () => console.log('Express Server listening on port '+PORT))
 EOM
 ```
 
-### Create pug partials
-```sh
-touch views/includes/footer.pug
-touch views/includes/header.pug
-touch views/index.pug
-touch views/layout.pug
-touch views/login.pug
-```
-
 ### Fill boilerplate in pug partials
 ```sh
-touch views/includes/footer.pug
+touch views/includes/footer.pug &&
 cat <<EOM >views/includes/footer.pug
 footer
   h4 Footer stub from footer.pug
   p For to study
 EOM
-touch views/includes/header.pug
+touch views/includes/header.pug &&
 cat <<EOM >views/includes/header.pug
 header
   h1 Flashcards 
   h4 Heading from header.pug
 EOM
-touch views/index.pug
+touch views/index.pug &&
 cat <<EOM >views/index.pug
 extends layout.pug
 
@@ -121,7 +112,7 @@ block content
       a(href='/login') Click to log in
     p Section id #content and this h4 text content from the index.pug file. 
 EOM
-touch views/layout.pug
+touch views/layout.pug &&
 cat <<EOM >views/layout.pug
 doctype html
 html(lang="en")
@@ -133,7 +124,7 @@ html(lang="en")
     block content
     include includes/footer.pug
 EOM
-touch views/login.pug
+touch views/login.pug &&
 cat <<EOM >views/login.pug
 extends layout.pug
 
