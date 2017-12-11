@@ -1,0 +1,38 @@
+<!doctype=html>
+<html>
+    <head>
+    </head>
+    <body>
+      <h1>Fetch Your GitHub Repositories</h1>
+      <ul class="repoList">
+      </ul>
+      <style>
+        *{margin:0;padding:0;outline:0;font-size:1em;font-weight:normal;font-style:normal;border:0;text-decoration:none;list-style-type:none}
+        .repoList {
+          margin: 10px auto;
+          padding: 10px;
+        }
+      </style>
+      <script>
+        const repoList = document.querySelector('.repoList')
+        function renderRepo(repo) {
+          const li = document.createElement('LI');
+          const link = document.createElement('A');
+          link.href = repo.html_url;
+          link.innerText = repo.name;
+          li.appendChild(link);
+          repoList.appendChild(li);
+        }
+
+        fetch('https://api.github.com/users/usarneme/repos')
+            .then(function(response) {
+                return response.json()
+            })
+            .then(function(myJSON) {
+                const repos = Array.from(myJSON)
+                repos.forEach(repo => renderRepo(repo))
+            })            
+      </script>
+    </body>
+</html>
+
