@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Colorful Draggable Notes</title>
+</head>
+<body>
+  <h1>Colorful Draggable Notes</h1>
+  <label for="howMany">About how many items do you want to see?</label>
+  <input name="howMany" id="howMany" value="9">
+
+  <div class="notes"></div>
+
+  <script>
+    const storageObject = {};
+    
+    const notesDiv = document.querySelector('.notes');
+    // number of tasks, default is 9
+    let numberOfItems = 9;
+
+    function createItem(i, j) {
+      return `
+          <div class="item" style="top:${i * window.innerHeight / 4}px;left:${j * window.innerWidth / 5}px;">
+            <span class="child number">${i + j}</span>
+            <span class="child title editable">Title ${i + j}</span>
+            <button class="delete">X</button>
+            <div class="child textbox editable"></div>
+          </div>`
+    }
+
+    function deleteItem() {
+      const item = event.target.parentNode;
+      notesDiv.removeChild(item);
+    }
+
+    function buildBoard() {
+      // gets a little resource intense after too many nodes...
+      if (numberOfItems >= 50) {
+        numberOfItems = 49;
+      } 
+      notesDiv.innerHTML = '';
+      // Start by positioning the box notes in a grid
+      for(let i=1; i < (numberOfItems / 5) + 1; i+=1) {
+        for(let j=0; j<5; j++) {
+          notesDiv.innerHTML += createItem(i, j);
+        }
+      }
+      // Programmatically add event listeners for generated buttons
+      const deleteButtons = document.querySelectorAll('.delete');
+      deleteButtons.forEach(button => button.addEventListener('click', deleteItem));
+    }
+
+    function handleMove(event) {
+      // Prevent text highlighting and other behaviors
+      event.preventDefault();
+      if (!isDown) return;  // If the mouse button isn't down just return
+      if (event.target.classList.contains('child')) {
+        event.target.parentNode.style.top = `${event.clientY - (event.target.parentNode.offsetHeight / 2)}px`;
+        event.target.parentNode.style.left = `${event.clientX - (event.target.parentNode.offsetWidth / 2)}px`;    
+      }
+      event.target.style.top = `${event.clientY - (event.target.offsetHeight / 2)}px`;
+      event.target.style.left = `${event.clientX - (event.target.offsetWidth / 2)}px`;
+    }
+
+    // Toggle if the mousebutton is currently down/clicked
+    let isDown = false;
+    // Only drag items when the mouse is down and over an appropriate note object
+    notesDiv.addEventListener('mousedown', () => { isDown = true; });
+    notesDiv.addEventListener('mouseleave', () => { isDown = false; });
+    notesDiv.addEventListener('mouseup', () => { isDown = false; });
+    notesDiv.addEventListener('mousemove', handleMove);
+
+    document.getElementById('howMany').addEventListener('change', (e) => {
+      numberOfItems = e.target.value;
+      buildBoard();
+    })
+
+    buildBoard();
+    window.addEventListener('resize', buildBoard);
+
+  </script>
+  <style>
+      html {
+      box-sizing: border-box;
+    }
+
+    *, *:before, *:after {
+      box-sizing: inherit;
+    }
+
+    body {
+      margin: 0;
+    }
+
+    .items {
+      width: 100vw;
+      height: 100vh;
+      margin: 0;
+      z-index: 1;
+      /* Makes div resizable */
+      resize: both;
+      overflow: auto;
+    }
+
+    .item {
+      cursor: pointer;
+      width: 20vw;
+      height: 20vh;
+      position: absolute;
+      padding: 30px 10px;
+    }
+
+    .item:active {
+      cursor: grabbing;
+      cursor: -webkit-grabbing;
+    }
+
+    .textbox {
+      width: 100%;
+      height: 100%;
+    }
+
+    .editable {
+      background-color: #eee;
+      -webkit-user-modify: read-write;
+      -moz-user-modify: read-write;
+      user-modify: read-write;
+      padding: 1px;
+    }
+
+    .delete {
+      float: right;
+      margin: -20px 0;
+    }
+
+    .item:nth-child(9n+1) { background: dodgerblue;}
+    .item:nth-child(9n+2) { background: goldenrod;}
+    .item:nth-child(9n+3) { background: paleturquoise;}
+    .item:nth-child(9n+4) { background: gold;}
+    .item:nth-child(9n+5) { background: cadetblue;}
+    .item:nth-child(9n+6) { background: tomato;}
+    .item:nth-child(9n+7) { background: lightcoral;}
+    .item:nth-child(9n+8) { background: darkslateblue;}
+    .item:nth-child(9n+9) { background: rebeccapurple;}
+  </style>
+</body>
+</html>

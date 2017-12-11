@@ -8,7 +8,7 @@
 
 <div class="hero">
   <h1 contenteditable>
-    <p>Where is my mouse?</p>        
+    <p>Where is my mouse?</p>
   </h1>
   <div class="report"></div>
   <div class="score"></div>
@@ -46,8 +46,8 @@
       }
       console.log(x,y);
 
-      // game part, extra
-      if (x === y) {
+      // If coords are within +/- 10px of each other
+      if (x < (y + 10) && x > (y - 10)) {
         hero.style.cursor = 'crosshair';
         currentScore += 1;
       } else {
