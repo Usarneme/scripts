@@ -192,3 +192,4 @@ Pull/fork, or message me if you want to add anything or report any issues.
 This is a specific set of instructions for an HP Chromebook so it may not work the same for everyone and isn't intended to be an all-encompassing list. These are general instructions that should work with most linux distros using their various package managers/install schemes. 
 
 ##### Good luck!
+
