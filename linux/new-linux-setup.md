@@ -39,8 +39,11 @@
 
 ## Check your hardware with:
 `kvm-ok`
-
 ### Which should output: 
 INFO: /dev/kvm exists
 KVM acceleration can be used
+
+## Install Expo for Android dev
+`npm install -g expo-cli`
+`expo start`
 
