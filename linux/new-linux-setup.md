@@ -30,3 +30,17 @@
 
 ## To run, from /usr/local/android-studio/bin:
 `./studio.sh`
+
+## After running the first time some additional packages will be automatically installed. If your hardware supports it, these can speed up rendering during development
+`sudo apt-get install qemu-kvm libvirt-bin ubuntu-vm-builder bridge-utils virtinst cpu-checker libvirt-daemon-system libvirt-clients`
+
+## Any number above 1 should be acceptable, to test:
+`egrep -c '(vmx|svm)' /proc/cpuinfo`
+
+## Check your hardware with:
+`kvm-ok`
+
+### Which should output: 
+INFO: /dev/kvm exists
+KVM acceleration can be used
+
